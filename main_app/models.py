@@ -3,6 +3,11 @@ from django.urls import reverse
 
 # Create your models here:
 
+ACTIVITIES = (
+    ('Start', 'Started reading'),
+    ('Finish', 'Finished reading'),
+)
+
 class Book(models.Model):
     title = models.CharField(max_length=300)
     author = models.CharField(max_length=256)
@@ -16,3 +21,16 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
+class Read(models.Model):
+    date = models.DateField()
+    activity = models.CharField(
+        max_length=256,
+        choices=ACTIVITIES,
+        default=ACTIVITIES[0][0]
+        )
+    review = models.TextField(max_length=400, blank=True)
+
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.get_activity_display()} on {self.date}"
