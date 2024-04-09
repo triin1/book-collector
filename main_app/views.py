@@ -1,11 +1,5 @@
 from django.shortcuts import render
-
-# temporary data:
-books = [
-    {'title': 'My Brilliant Friend', 'author': 'Elena Ferrante', 'format': 'Paperback', 'language': 'English', 'publish_year': '2012'},
-    {'title': 'Banker to the Poor', 'author': 'Muhammad Yunus', 'format': 'Ebook', 'language': 'English', 'publish_year': '1999'},
-    {'title': 'Ready Player One', 'author': 'Ernest Cline', 'format': 'Audiobook', 'language': 'English', 'publish_year': '2012'},
-]
+from .models import Book
 
 # Create your views here:
 
@@ -16,4 +10,13 @@ def about(request):
     return render(request, 'about.html')
 
 def books_index(request):
-    return render(request, 'books/index.html')
+    books = Book.objects.all()
+    return render(request, 'books/index.html', {
+        'books': books
+    })
+
+def books_detail(request, book_id):
+    book = Book.objects.get(id=book_id)
+    return render(request, 'books/detail.html', {
+        'book': book
+    })
