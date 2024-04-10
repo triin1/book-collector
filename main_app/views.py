@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.views.generic import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Book, Genre
 from .forms import ReadForm
@@ -32,6 +33,10 @@ def add_genre(request, book_id, genre_id):
     Book.objects.get(id=book_id).genres.add(genre_id)
     return redirect('detail', book_id=book_id)
 
+def remove_genre(request, book_id, genre_id):
+    Book.objects.get(id=book_id).genres.remove(genre_id)
+    return redirect('detail', book_id=book_id)
+
 class BookCreate(CreateView):
     model = Book
     fields = '__all__'
@@ -42,7 +47,7 @@ class BookEdit(UpdateView):
 
 class BookDelete(DeleteView):
     model = Book
-    success_url = '/books'
+    success_url = '/books/'
 
 def add_read(request, book_id):
     read_form = ReadForm(request.POST)
@@ -50,4 +55,27 @@ def add_read(request, book_id):
         new_read = read_form.save(commit=False)
         new_read.book_id = book_id
         new_read.save()
-    return redirect('detail', book_id=book_id)    
+    return redirect('detail', book_id=book_id) 
+
+class GenreList(ListView):
+    model = Genre
+
+class GenreCreate(CreateView):
+    model = Genre
+    fields = '__all__'
+
+class GenreUpdate(UpdateView):
+    model = Genre
+    fields = '__all__'
+
+class GenreDelete(DeleteView):
+    model = Genre
+    success_url = '/genres/'
+
+# # Attempt to add genres at the bottom of the field:
+# def create_genre(request):
+#     genre_form = GenreForm(request.POST)
+#     print('I can see the form')
+#     if genre_form.is_valid():
+#         new_genre = genre_form.save()
+#     return redirect('detail', book_id=book_id)

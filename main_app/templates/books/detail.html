@@ -59,6 +59,12 @@
                     <span class="card-title"></span>
                     {{ genre.name }}
                 </div>
+                <div class="card-action">
+                    <form action="{% url 'remove_genre' book.id genre.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">Remove</button>
+                    </form>
+                </div>
             </div>
             {% endfor %}
             {% else %}
@@ -87,6 +93,7 @@
     </div>
 </div>
 
+
 <!-- this JS code is to fix the date picking field and drop-down menu in the form to add read activity -->
 <script>
     const dateElement = document.getElementById('id_date');
@@ -102,3 +109,14 @@ M.FormSelect.init(selectElement);
 </script>
 
 {% endblock %}
+
+
+{% comment %} # # Attempt to add genres at the bottom of the field: {% endcomment %}
+{% comment %} 
+<p>Need to add a genre?</p>
+<form action="{% url 'create_genre' book.id genre.id %}" method="post">
+    {% csrf_token %}
+    <label>Genre name:</label>
+    <input type="text">
+    <input type="submit" value="Add genre" class="btn">
+</form> {% endcomment %}

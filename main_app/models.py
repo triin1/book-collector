@@ -12,7 +12,7 @@ class Genre(models.Model):
     name = models.CharField(max_length=256)
 
     def get_absolute_url(self):
-        return reverse('genre_index', kwargs={'pk': self.id})
+        return reverse('genres_index')
 
     def __str__(self):
         return self.name    

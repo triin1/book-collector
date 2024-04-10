@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if object %}
+        <h1>Edit "{{ object.name }}"</h1>
+    {% else %}
+        <h1>Add a genre</h1>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+            {{ form.as_p }}
+        {% if object %}
+            <input type="submit" value="Update genre" class="btn">
+        {% else %}
+            <input type="submit" value="Add genre" class="btn">
+        {% endif %}
+    </form>
+
+{% endblock %}

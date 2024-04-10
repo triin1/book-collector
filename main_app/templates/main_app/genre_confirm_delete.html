@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Delete genre</h1>
+    <h2>
+        Are you sure you want to delete
+        "{{ object.name }}"?
+    </h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Yes" class="btn">
+        <a href="{% url 'genres_index' %}" class="btn">No</a>
+    </form>
+
+{% endblock %}
