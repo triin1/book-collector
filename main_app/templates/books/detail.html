@@ -90,6 +90,7 @@
             {% else %}
                 <p> {{ book.name }} already has all available genres added (you've probably made a mistake, review your list).</p>
         {% endif %}
+
     </div>
 </div>
 
@@ -109,14 +110,3 @@ M.FormSelect.init(selectElement);
 </script>
 
 {% endblock %}
-
-
-{% comment %} # # Attempt to add genres at the bottom of the field: {% endcomment %}
-{% comment %} 
-<p>Need to add a genre?</p>
-<form action="{% url 'create_genre' book.id genre.id %}" method="post">
-    {% csrf_token %}
-    <label>Genre name:</label>
-    <input type="text">
-    <input type="submit" value="Add genre" class="btn">
-</form> {% endcomment %}

@@ -18,7 +18,4 @@ urlpatterns = [
     path('genres/create/', views.GenreCreate.as_view(), name='genres_create'),
     path('genres/<int:pk>/update/', views.GenreUpdate.as_view(), name='genre_update'),
     path('genres/<int:pk>/delete/', views.GenreDelete.as_view(), name='genre_delete'),
-
-    # # Attempt to add genres at the bottom of the field:
-    # path('books/<int:book_id>/create_genre/<int:genre_id>/', views.create_genre, name='create_genre'),
 ]

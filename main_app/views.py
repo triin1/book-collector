@@ -71,11 +71,3 @@ class GenreUpdate(UpdateView):
 class GenreDelete(DeleteView):
     model = Genre
     success_url = '/genres/'
-
-# # Attempt to add genres at the bottom of the field:
-# def create_genre(request):
-#     genre_form = GenreForm(request.POST)
-#     print('I can see the form')
-#     if genre_form.is_valid():
-#         new_genre = genre_form.save()
-#     return redirect('detail', book_id=book_id)
